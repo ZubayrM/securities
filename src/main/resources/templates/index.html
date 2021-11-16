@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Securities</title>
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/index.js"></script>
+</head>
+
+<body>
+<div id="add-security">
+    <form id="add">
+        <input type="date" name="date">
+        <input type="text" name="name">
+        <input type="number" name="price">
+        <input type="button" value="добавить" onclick="add()">
+    </form>
+</div>
+
+
+
+<hr>
+
+    <form action="/api/all" method="get" id="table">
+        <input type="submit">
+        <table>
+            <tr>
+                <th>Дата</th>
+                <th>Наименование</th>
+                <th>Стоимость</th>
+            </tr>
+            <tr th:each="o : ${list}" ><!--th:each="list"-->
+                <td th:value="date" >default</td>
+                <td th:value="name" >default</td>
+                <td th:value="price" >default</td>
+            </tr>
+        </table>
+    </form>
+
+
+
+
+</body>
+</html>
