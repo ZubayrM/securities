@@ -3,43 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Securities</title>
-    <link href="../static/css/index.css" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/script/index.js"></script>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-<div id="add-security">
-    <form id="add">
-        <input type="date" name="date">
-        <input type="text" name="name">
-        <input type="number" name="price">
-        <input type="button" value="добавить" onclick="add()">
-    </form>
+<button id="open-add-security" class="btn btn-primary" data-toggle="modal" data-target="#add-security">add</button>
+
+<div id="add-security" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new security</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add">
+                    <label>Date</label>
+                    <input type="date" name="date" class="form-control">
+                    <br>
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control">
+                    <br>
+                    <label>Price</label>
+                    <input type="text" name="price" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="add()">Save</button>
+            </div>
+        </div>
+    </div>
+
 </div>
-
-
 
 <hr>
 
-    <form action="/api/all" method="get" id="table">
-        <input type="submit">
-        <table>
+
+
+<div id="container"></div>
+
+<hr>
+    <div id="table">
+
+        <table class="table">
             <tr>
                 <th>Дата</th>
                 <th>Наименование</th>
                 <th>Стоимость</th>
+                <th></th>
             </tr>
-            <tr th:each="o : ${list}" ><!--th:each="list"-->
-                <td th:value="date" >default</td>
-                <td th:value="name" >default</td>
-                <td th:value="price" >default</td>
+            <tr th:each="o : ${list}">
+                <form th:id="upd + ${o.id}">
+                    <td>
+                        <input type="date" name="date" th:value="${o.date}" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="name" th:value="${o.name}" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="price"  th:value="${o.price}" class="form-control">
+                    </td>
+                    <td>
+                        <button th:attr="id = ${o.id}"  onclick="upd(id)" class="btn btn-dark">upd</button>
+                    </td>
+                    <td>
+                        <input type="hidden" name="id" th:value="${o.id}">
+                    </td>
+                </form>
             </tr>
         </table>
-    </form>
 
 
 
+    </div>
 
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
+<script src="script/API.js"></script>
+<script src="script/index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

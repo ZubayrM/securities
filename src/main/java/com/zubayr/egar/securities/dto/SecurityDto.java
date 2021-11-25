@@ -1,4 +1,4 @@
-package com.zubayr.egar.securities;
+package com.zubayr.egar.securities.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SecurityDto {
+
+    private String id;
 
     private String date;
 

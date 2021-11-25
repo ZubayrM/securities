@@ -1,47 +1,38 @@
-function add(){
-    let data = $('#add').serialize();
-    $.ajax({
-        method: "POST",
-        url: "api/add",
-        data:  data
-    });
-    setTimeout('window.location.reload()',200);
+chart = anychart.area();
+
+window.onload = function (){
+    getDataInDiagram();
 }
 
-function del(id){
-    $.ajax({
-        method: "DELETE",
-        url: "/api/del/" + id,
-    });
-    setTimeout('window.location.reload()',200);
-}
 
-function upd() {
-    let data = $('#updElement').serialize();
-    $.ajax({
-        method: "PUT",
-        url: "/api/upd",
-        data: data
-    });
-    setTimeout('window.location.reload()',200);
-}
+function startDiagram(newData){
+    let list = newData;
+    console.log(list)
 
-function get(id){
-    $.ajax({
-        method: "GET",
-        url: "/api/" + id,
-        success: function (response){
-            return response;
+    if (list === undefined){
+        alert("не судьба")
+    }else {
+        for (i = 0; i < list.length; i++){
+            let data = list[i]
+            addToDiagram(data.list, data.name)
         }
-    });
-    setTimeout('window.location.reload()',200);
+    }
+
 }
-function getAll(){
-    $.ajax({
-        method: "GET",
-        url: "api/getAll",
-        success: function (response){
-            return response;
-        }
-    })
+
+
+
+
+
+
+
+function addToDiagram(date, name){
+    let series = chart.area(date)
+    series.name(name)
 }
+
+
+
+chart.legend().enabled(true).fontSize(13).padding([30, 30, 30, 30])
+chart.container("container");
+chart.draw();

@@ -1,9 +1,9 @@
 package com.zubayr.egar.securities;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class SecuritiesApplication {
@@ -12,6 +12,10 @@ public class SecuritiesApplication {
 		SpringApplication.run(SecuritiesApplication.class, args);
 	}
 
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
 
 
 }

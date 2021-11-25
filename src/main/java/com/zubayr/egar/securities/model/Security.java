@@ -1,4 +1,4 @@
-package com.zubayr.egar.securities;
+package com.zubayr.egar.securities.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
